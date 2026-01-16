@@ -32,10 +32,7 @@ export default async function Home() {
         
         {/* Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-12">
-            <span className="inline-block py-1 px-3 border border-olive/50 rounded-full bg-moss/50 backdrop-blur-sm text-[10px] font-bold uppercase tracking-[0.2em] mb-6 text-cedar">
-                A Forbes-Level Climate Initiative
-            </span>
-            
+                        
             <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight mb-6 max-w-4xl">
                 Restoring Nature <br/>
                 <span className="text-olive">Where People Live.</span>

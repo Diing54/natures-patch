@@ -39,6 +39,15 @@ export default {
       type: 'string'
     },
     {
+      name: 'geo',
+      title: 'Geographic Coordinates',
+      type: 'object',
+      fields: [
+      {name: 'lat', title: 'Latitude', type: 'number'},
+      {name: 'lng', title: 'Longitude', type: 'number'}
+      ]
+    },
+    {
       name: 'description',
       title: 'Short Description',
       type: 'text',
