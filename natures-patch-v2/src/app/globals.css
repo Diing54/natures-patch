@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* Your Custom Palette */
+  --color-moss: #2C3424;    /* */
+  --color-cypress: #4C583E; /* */
+  --color-olive: #768064;   /* */
+  --color-cedar: #959581;   /* */
+  --color-aloe: #DADED8;    /* */
+  --color-light: #F9FAF8;
+
+  /* Typography */
+  --font-serif: 'Times New Roman', serif;
+  --font-sans: 'Arial', sans-serif;
+}
+
+/* Apply the default background immediately */
+body {
+  background-color: var(--color-aloe);
+  color: var(--color-moss);
+}
