@@ -1,6 +1,24 @@
-import Image from "next/image";
+import { client } from "../sanity/client";
 
-export default function Home() {
+// 1. QUERY: Get the stats from Sanity
+const query = `*[_type == "stats"][0]{
+  treesPlanted,
+  acresRestored,
+  carbonSequestered,
+  survivalRate
+}`;
+
+// 2. Make the component Async to fetch data
+export default async function Home() {
+
+  // 3. Fetch data (with fallback zeros if Sanity is empty)
+  const data = await client.fetch(query) || {
+      treesPlanted: '0',
+      acresRestored: '0',
+      carbonSequestered: '0',
+      survivalRate: 0
+  };
+
   return (
     <div className="flex flex-col">
       
@@ -14,7 +32,9 @@ export default function Home() {
         
         {/* Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-12">
-           
+            <span className="inline-block py-1 px-3 border border-olive/50 rounded-full bg-moss/50 backdrop-blur-sm text-[10px] font-bold uppercase tracking-[0.2em] mb-6 text-cedar">
+                A Forbes-Level Climate Initiative
+            </span>
             
             <h1 className="font-serif text-5xl md:text-7xl font-bold leading-tight mb-6 max-w-4xl">
                 Restoring Nature <br/>
@@ -36,38 +56,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. IMPACT SNAPSHOT
-          Goal: Showcase measurable achievements.
+      {/* 2. IMPACT SNAPSHOT (DYNAMIC)
+          Goal: Showcase measurable achievements using LIVE SANITY DATA.
       */}
       <section className="bg-white py-12 border-b border-olive/10">
         <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-olive/10">
                 
                 <div className="p-4">
-                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">15k+</div>
+                    {/* Dynamic Variable */}
+                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">{data.treesPlanted}</div>
                     <div className="text-xs font-bold uppercase tracking-widest text-cedar">Trees Planted</div>
                 </div>
                 
                 <div className="p-4">
-                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">85%</div>
+                    {/* Dynamic Variable */}
+                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">{data.survivalRate}%</div>
                     <div className="text-xs font-bold uppercase tracking-widest text-cedar">Survival Rate</div>
                 </div>
                 
                 <div className="p-4">
-                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">120</div>
+                    {/* Dynamic Variable */}
+                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">{data.carbonSequestered}</div>
                     <div className="text-xs font-bold uppercase tracking-widest text-cedar">Tons CO₂ Absorbed</div>
                 </div>
                 
                 <div className="p-4">
-                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">12</div>
-                    <div className="text-xs font-bold uppercase tracking-widest text-cedar">Communities</div>
+                    {/* Dynamic Variable (Mapped 'Communities' to 'Acres Restored' so it matches your DB) */}
+                    <div className="font-serif text-4xl md:text-5xl font-bold text-moss mb-2">{data.acresRestored}</div>
+                    <div className="text-xs font-bold uppercase tracking-widest text-cedar">Acres Restored</div>
                 </div>
 
             </div>
         </div>
       </section>
 
-      {/* 3. FEATURED PROJECTS PREVIEW */}
+      {/* 3. FEATURED PROJECTS PREVIEW (Static for now, preserving your layout) */}
       <section className="py-24 bg-light">
           <div className="max-w-7xl mx-auto px-6">
               
@@ -87,7 +111,6 @@ export default function Home() {
                   {/* Card 1 */}
                   <div className="group bg-white rounded-sm shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
                       <div className="h-64 bg-cedar/20 relative">
-                          {/* Placeholder for Image */}
                           <div className="absolute inset-0 flex items-center justify-center text-moss/20 font-serif text-2xl italic">Image Placeholder</div>
                           <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-moss">Reforestation</div>
                       </div>

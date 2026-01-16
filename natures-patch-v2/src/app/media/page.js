@@ -1,9 +1,35 @@
+import { client } from "../../sanity/client";
+
+// 1. GROQ Query: Get news items, sorted by newest date first
+const query = `*[_type == "news"] | order(publishedAt desc) {
+  _id,
+  title,
+  publishedAt,
+  summary,
+  link
+}`;
+
 export const metadata = {
   title: "Media & Press | Nature's Patch",
   description: "Official press releases, brand guidelines, and media resources.",
 };
 
-export default function MediaPage() {
+// 2. Helper function to make dates look nice (e.g., "Oct 24, 2025")
+function formatDate(dateString) {
+    if (!dateString) return 'Date Pending';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+    });
+}
+
+export default async function MediaPage() {
+  
+  // 3. Fetch the data
+  const newsItems = await client.fetch(query);
+
   return (
     <div className="bg-white min-h-screen">
       
@@ -22,7 +48,7 @@ export default function MediaPage() {
         </div>
       </section>
 
-      {/* === 8.1 PRESS RELEASES === */}
+      {/* === DYNAMIC NEWS SECTION === */}
       <section className="py-20 max-w-7xl mx-auto px-6 border-b border-olive/10">
           <div className="flex justify-between items-end mb-12">
               <h2 className="font-serif text-3xl font-bold text-moss">Latest News</h2>
@@ -31,46 +57,34 @@ export default function MediaPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               
-              {/* Release 1 */}
-              <article className="group">
-                  <div className="text-xs text-cedar font-bold uppercase tracking-widest mb-2">Oct 24, 2025</div>
-                  <h3 className="font-serif text-xl font-bold text-moss mb-3 group-hover:text-cypress transition-colors cursor-pointer">
-                      Nature's Patch Secures $50k Grant from Green Future Fund
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                      The funding will accelerate our "Schools for Sustainability" program in Machakos County.
-                  </p>
-                  <a href="#" className="text-xs font-bold text-olive uppercase hover:text-moss">Read Release</a>
-              </article>
-
-              {/* Release 2 */}
-              <article className="group">
-                  <div className="text-xs text-cedar font-bold uppercase tracking-widest mb-2">Sep 12, 2025</div>
-                  <h3 className="font-serif text-xl font-bold text-moss mb-3 group-hover:text-cypress transition-colors cursor-pointer">
-                      Urban Forestry Initiative Launches in Westlands
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                      A partnership with the City Council to plant 2,000 indigenous trees along major highways.
-                  </p>
-                  <a href="#" className="text-xs font-bold text-olive uppercase hover:text-moss">Read Release</a>
-              </article>
-
-              {/* Release 3 */}
-              <article className="group">
-                  <div className="text-xs text-cedar font-bold uppercase tracking-widest mb-2">Aug 05, 2025</div>
-                  <h3 className="font-serif text-xl font-bold text-moss mb-3 group-hover:text-cypress transition-colors cursor-pointer">
-                      Impact Report Q2: Survival Rates Hit Record 85%
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                      New data from our monitoring team confirms the effectiveness of our community stewardship model.
-                  </p>
-                  <a href="#" className="text-xs font-bold text-olive uppercase hover:text-moss">Read Release</a>
-              </article>
+              {/* 4. Loop through Sanity Data */}
+              {newsItems.length > 0 ? (
+                  newsItems.map((item) => (
+                    <article key={item._id} className="group">
+                        <div className="text-xs text-cedar font-bold uppercase tracking-widest mb-2">
+                            {formatDate(item.publishedAt)}
+                        </div>
+                        <h3 className="font-serif text-xl font-bold text-moss mb-3 group-hover:text-cypress transition-colors cursor-pointer">
+                            {item.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                            {item.summary}
+                        </p>
+                        {item.link ? (
+                            <a href={item.link} target="_blank" className="text-xs font-bold text-olive uppercase hover:text-moss">Read Full Story →</a>
+                        ) : (
+                            <span className="text-xs font-bold text-olive uppercase hover:text-moss cursor-pointer">Read Release</span>
+                        )}
+                    </article>
+                  ))
+              ) : (
+                  <p className="text-gray-500 italic">No news updates available yet.</p>
+              )}
 
           </div>
       </section>
 
-      {/* === 8.2 MEDIA KIT (Downloads) === */}
+      {/* === MEDIA KIT (Downloads) - Static Assets === */}
       <section className="bg-light py-20">
           <div className="max-w-7xl mx-auto px-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
