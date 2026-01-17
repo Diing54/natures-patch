@@ -34,6 +34,7 @@ export default function Navbar() {
           <a href="/impact" className="hover:text-cypress transition-colors">Impact</a>
           <a href="/projects" className="hover:text-cypress transition-colors">Projects</a>
           <a href="/map" className="hover:text-cypress transition-colors">Map</a>
+          <a href="/contact" className="hover:text-cypress transition-colors">Contact</a> {/* <--- Added Here */}
           <a href="/get-involved" className="bg-moss text-white px-5 py-2.5 rounded-sm hover:bg-cypress transition-all shadow-sm">
             Get Involved
           </a>
@@ -62,6 +63,7 @@ export default function Navbar() {
             <a href="/projects" onClick={() => setIsOpen(false)} className="border-b border-moss/10 pb-2">Projects</a>
             <a href="/map" onClick={() => setIsOpen(false)} className="border-b border-moss/10 pb-2">Map</a>
             <a href="/lab" onClick={() => setIsOpen(false)} className="border-b border-moss/10 pb-2">The Lab</a>
+            <a href="/contact" onClick={() => setIsOpen(false)} className="border-b border-moss/10 pb-2">Contact</a> {/* <--- Added Here */}
             <a href="/get-involved" onClick={() => setIsOpen(false)} className="text-cypress pt-2 text-base">→ Get Involved</a>
           </div>
         </div>
