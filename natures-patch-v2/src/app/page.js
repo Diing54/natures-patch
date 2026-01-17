@@ -1,5 +1,6 @@
 import { client } from "../sanity/client";
 
+export const dynamic = "force-dynamic";
 // 1. QUERY: Get the stats from Sanity
 const query = `*[_type == "stats"][0]{
   treesPlanted,

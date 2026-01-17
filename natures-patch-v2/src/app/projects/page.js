@@ -2,6 +2,8 @@ import Image from "next/image";
 import { client } from "../../sanity/client";
 import { urlFor } from "../../sanity/image";
 
+export const dynamic = "force-dynamic"; // <--- Add this line
+
 // 1. The GROQ Query (Asking Sanity for data)
 const query = `*[_type == "project"]{
   _id,

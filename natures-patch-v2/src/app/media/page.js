@@ -1,5 +1,6 @@
 import { client } from "../../sanity/client";
 
+export const dynamic = "force-dynamic";
 // 1. GROQ Query: Get news items, sorted by newest date first
 const query = `*[_type == "news"] | order(publishedAt desc) {
   _id,

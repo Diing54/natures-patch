@@ -1,6 +1,8 @@
 import { client } from "../../sanity/client";
 import MapWrapper from "../../components/MapWrapper"; // <--- Import the wrapper, not dynamic
 
+export const dynamic = "force-dynamic";
+
 // Fetch Projects + Coordinates
 const query = `*[_type == "project"]{
   _id,
