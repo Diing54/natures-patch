@@ -1,11 +1,23 @@
-export const metadata = {
-  title: "Get Involved | Nature's Patch",
-  description: "Volunteer, Partner, or Adopt a Tree.",
-};
+"use client";
+
+import { useForm, ValidationError } from '@formspree/react';
+
+// Meta can't be exported from "use client" components in Next.js 13+
+// We usually move this to a layout or page wrapper, but for now we'll skip the export
+// to prevent the build error.
 
 export default function GetInvolvedPage() {
+  
+  // 1. Hook up the Partner Form to Formspree
+  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORMSPREE_ID);
+
+  // Helper for Demo Donation Buttons
+  const handleDonate = (amount) => {
+    alert(`In a real app, this would open Stripe Checkout for $${amount}.`);
+  };
+
   return (
-    <div className="bg-light min-h-screen">
+    <div className="bg-white min-h-screen">
       
       {/* === HEADER === */}
       <section className="bg-moss text-white py-20 text-center">
@@ -22,7 +34,7 @@ export default function GetInvolvedPage() {
         </div>
       </section>
 
-      {/* === 6.3 ADOPT A TREE (Priority Section) === */}
+      {/* === ADOPT A TREE (Priority Section) === */}
       <section id="adopt" className="py-20 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
               <h2 className="font-serif text-3xl font-bold text-moss">Adopt a Tree</h2>
@@ -40,7 +52,10 @@ export default function GetInvolvedPage() {
                       <li className="flex items-center"><span className="text-cypress mr-2">✓</span> GPS Location Data</li>
                       <li className="flex items-center"><span className="text-cypress mr-2">✓</span> Annual Photo Update</li>
                   </ul>
-                  <button className="w-full py-3 border-2 border-moss text-moss font-bold uppercase tracking-widest text-xs hover:bg-moss hover:text-white transition-colors rounded-sm">
+                  <button 
+                    onClick={() => handleDonate(10)}
+                    className="w-full py-3 border-2 border-moss text-moss font-bold uppercase tracking-widest text-xs hover:bg-moss hover:text-white transition-colors rounded-sm"
+                  >
                       Adopt Now
                   </button>
               </div>
@@ -58,7 +73,10 @@ export default function GetInvolvedPage() {
                       <li className="flex items-center"><span className="text-cypress mr-2">✓</span> Name on Website Wall</li>
                       <li className="flex items-center"><span className="text-cypress mr-2">✓</span> <strong>10% Discount</strong></li>
                   </ul>
-                  <button className="w-full py-3 bg-moss text-white font-bold uppercase tracking-widest text-xs hover:bg-cypress transition-colors rounded-sm shadow-md">
+                  <button 
+                    onClick={() => handleDonate(100)}
+                    className="w-full py-3 bg-moss text-white font-bold uppercase tracking-widest text-xs hover:bg-cypress transition-colors rounded-sm shadow-md"
+                  >
                       Adopt a Patch
                   </button>
               </div>
@@ -73,15 +91,15 @@ export default function GetInvolvedPage() {
                       <li className="flex items-center"><span className="text-cypress mr-2">✓</span> Team Planting Day</li>
                       <li className="flex items-center"><span className="text-cypress mr-2">✓</span> Branded Signage</li>
                   </ul>
-                  <button className="w-full py-3 border-2 border-moss text-moss font-bold uppercase tracking-widest text-xs hover:bg-moss hover:text-white transition-colors rounded-sm">
+                  <a href="#partner-form" className="block w-full py-3 border-2 border-moss text-moss font-bold uppercase tracking-widest text-xs hover:bg-moss hover:text-white transition-colors rounded-sm">
                       Contact Partnership
-                  </button>
+                  </a>
               </div>
 
           </div>
       </section>
 
-      {/* === 6.1 & 6.2 VOLUNTEER & PARTNER === */}
+      {/* === VOLUNTEER & PARTNER === */}
       <section className="bg-white py-20 border-t border-olive/10">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16">
               
@@ -93,14 +111,14 @@ export default function GetInvolvedPage() {
                   </p>
                   
                   <div className="space-y-6">
-                      <div className="flex gap-4 p-4 bg-light rounded-sm border border-transparent hover:border-olive/30 transition-colors">
+                      <div className="flex gap-4 p-4 bg-gray-50 rounded-sm border border-transparent hover:border-olive/30 transition-colors">
                           <div className="text-2xl">🌱</div>
                           <div>
                               <h4 className="font-bold text-moss">Planting Days</h4>
                               <p className="text-sm text-cedar">Weekends • 4 Hours • Physical Work</p>
                           </div>
                       </div>
-                      <div className="flex gap-4 p-4 bg-light rounded-sm border border-transparent hover:border-olive/30 transition-colors">
+                      <div className="flex gap-4 p-4 bg-gray-50 rounded-sm border border-transparent hover:border-olive/30 transition-colors">
                           <div className="text-2xl">📸</div>
                           <div>
                               <h4 className="font-bold text-moss">Content Creator</h4>
@@ -109,39 +127,55 @@ export default function GetInvolvedPage() {
                       </div>
                   </div>
 
-                  <a href="#" className="inline-block mt-8 text-cypress font-bold uppercase text-xs tracking-widest border-b border-cypress pb-1 hover:text-moss transition-colors">
+                  {/* LINKED TO CONTACT PAGE */}
+                  <a href="/contact" className="inline-block mt-8 text-cypress font-bold uppercase text-xs tracking-widest border-b border-cypress pb-1 hover:text-moss transition-colors">
                       Fill Volunteer Application →
                   </a>
               </div>
 
-              {/* Partners Column */}
-              <div>
+              {/* Partners Column (FUNCTIONAL FORM) */}
+              <div id="partner-form">
                   <h3 className="font-serif text-3xl font-bold text-moss mb-4">Partner With Us</h3>
                   <p className="text-gray-600 mb-8 leading-relaxed">
                       Align your brand with tangible climate action. We work with schools, corporations, and local governments to create green spaces.
                   </p>
                   
-                  <form className="space-y-4">
-                      <div>
-                          <label className="block text-xs font-bold uppercase text-cedar mb-1">Organization Name</label>
-                          <input type="text" className="w-full bg-light border border-olive/20 p-3 text-sm focus:outline-none focus:border-moss rounded-sm" />
-                      </div>
-                      <div>
-                          <label className="block text-xs font-bold uppercase text-cedar mb-1">Email Address</label>
-                          <input type="email" className="w-full bg-light border border-olive/20 p-3 text-sm focus:outline-none focus:border-moss rounded-sm" />
-                      </div>
-                      <div>
-                          <label className="block text-xs font-bold uppercase text-cedar mb-1">Partnership Interest</label>
-                          <select className="w-full bg-light border border-olive/20 p-3 text-sm focus:outline-none focus:border-moss rounded-sm">
-                              <option>Corporate CSR</option>
-                              <option>School Program</option>
-                              <option>Government / Policy</option>
-                          </select>
-                      </div>
-                      <button className="px-8 py-3 bg-cypress text-white font-bold uppercase tracking-widest text-xs hover:bg-moss transition-colors rounded-sm">
-                          Send Inquiry
-                      </button>
-                  </form>
+                  {state.succeeded ? (
+                    <div className="bg-moss text-white p-6 rounded-sm text-center animate-fade-in">
+                        <p className="font-bold text-xl mb-2">Inquiry Sent!</p>
+                        <p className="text-sm text-aloe">We will be in touch regarding your partnership request.</p>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Hidden field to tell you this came from the Partner page */}
+                        <input type="hidden" name="subject" value="New Partnership Inquiry" />
+                        
+                        <div>
+                            <label className="block text-xs font-bold uppercase text-cedar mb-1">Organization Name</label>
+                            <input name="organization" type="text" className="w-full bg-gray-50 border border-olive/20 p-3 text-sm focus:outline-none focus:border-moss rounded-sm" required />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold uppercase text-cedar mb-1">Email Address</label>
+                            <input name="email" type="email" className="w-full bg-gray-50 border border-olive/20 p-3 text-sm focus:outline-none focus:border-moss rounded-sm" required />
+                            <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold uppercase text-cedar mb-1">Partnership Interest</label>
+                            <select name="interest" className="w-full bg-gray-50 border border-olive/20 p-3 text-sm focus:outline-none focus:border-moss rounded-sm">
+                                <option>Corporate CSR</option>
+                                <option>School Program</option>
+                                <option>Government / Policy</option>
+                            </select>
+                        </div>
+                        <button 
+                            type="submit" 
+                            disabled={state.submitting}
+                            className="px-8 py-3 bg-cypress text-white font-bold uppercase tracking-widest text-xs hover:bg-moss transition-colors rounded-sm disabled:opacity-50"
+                        >
+                            {state.submitting ? "Sending..." : "Send Inquiry"}
+                        </button>
+                    </form>
+                  )}
               </div>
 
           </div>
