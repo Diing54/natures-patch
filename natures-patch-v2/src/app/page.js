@@ -1,17 +1,16 @@
 import { client } from "../sanity/client";
 import Image from "next/image";
 import imageUrlBuilder from '@sanity/image-url';
+import Link from "next/link"; // <--- Import Link
 
-// 1. CONFIG: Prevent caching so new projects show up instantly
 export const dynamic = "force-dynamic";
 
-// 2. SETUP: Image Builder for Sanity
 const builder = imageUrlBuilder(client);
 function urlFor(source) {
   return builder.image(source);
 }
 
-// 3. QUERY: Fetch Stats AND the 3 Newest Projects
+// Updated Query: Includes 'slug' and 'description'
 const query = `{
   "stats": *[_type == "stats"][0]{
     treesPlanted,
@@ -24,16 +23,16 @@ const query = `{
     title,
     location,
     status,
+    slug,          // <--- NEEDED FOR LINK
+    description,   // <--- NEEDED FOR PREVIEW TEXT
     mainImage
   }
 }`;
 
 export default async function Home() {
 
-  // 4. FETCH: Get the data (with safe fallbacks)
   const data = await client.fetch(query) || {};
   
-  // Destructure with defaults to prevent crashes if Sanity is empty
   const stats = data.stats || { 
     treesPlanted: '0', acresRestored: '0', carbonSequestered: '0', survivalRate: 0 
   };
@@ -64,7 +63,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* === IMPACT SNAPSHOT (DYNAMIC) === */}
+      {/* === IMPACT SNAPSHOT === */}
       <section className="bg-white py-12 border-b border-olive/10">
         <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-olive/10">
@@ -88,7 +87,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* === FEATURED PROJECTS PREVIEW (DYNAMIC) === */}
+      {/* === FEATURED PROJECTS PREVIEW === */}
       <section className="py-24 bg-light">
           <div className="max-w-7xl mx-auto px-6">
               
@@ -97,9 +96,9 @@ export default async function Home() {
                       <h2 className="font-serif text-3xl md:text-4xl font-bold text-moss mb-2">Featured Initiatives</h2>
                       <p className="text-cedar">Real-time updates from the field.</p>
                   </div>
-                  <a href="/projects" className="hidden md:inline-block text-cypress font-bold uppercase text-xs tracking-widest border-b border-cypress pb-1 hover:text-moss hover:border-moss transition-all">
+                  <Link href="/projects" className="hidden md:inline-block text-cypress font-bold uppercase text-xs tracking-widest border-b border-cypress pb-1 hover:text-moss hover:border-moss transition-all">
                       View All Projects →
-                  </a>
+                  </Link>
               </div>
 
               {/* DYNAMIC GRID */}
@@ -107,40 +106,44 @@ export default async function Home() {
                   
                   {projects.length > 0 ? (
                       projects.map((project) => (
-                        <div key={project._id} className="group bg-white rounded-sm shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col h-full">
-                            
-                            {/* Image Section */}
-                            <div className="h-64 bg-cedar/20 relative">
-                                {project.mainImage ? (
-                                    <Image 
-                                        src={urlFor(project.mainImage).width(600).url()} 
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                ) : (
-                                    <div className="absolute inset-0 flex items-center justify-center text-moss/20 font-serif text-xl italic">No Image</div>
-                                )}
-                                <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-moss">
-                                    {project.status || "Ongoing"}
+                        // LINK TO THE DYNAMIC SLUG PAGE
+                        <Link href={`/projects/${project.slug?.current}`} key={project._id}>
+                            <div className="group bg-white rounded-sm shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col h-full">
+                                
+                                {/* Image Section */}
+                                <div className="h-64 bg-cedar/20 relative">
+                                    {project.mainImage ? (
+                                        <Image 
+                                            src={urlFor(project.mainImage).width(600).url()} 
+                                            alt={project.title}
+                                            fill
+                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                    ) : (
+                                        <div className="absolute inset-0 flex items-center justify-center text-moss/20 font-serif text-xl italic">No Image</div>
+                                    )}
+                                    <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-moss">
+                                        {project.status || "Ongoing"}
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Text Section */}
-                            <div className="p-8 flex flex-col flex-grow">
-                                <h3 className="font-serif text-xl font-bold text-moss mb-3 group-hover:text-cypress transition-colors">
-                                    {project.title}
-                                </h3>
-                                <div className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow">
-                                    <span className="block mb-2 text-xs font-bold text-olive uppercase">
-                                        📍 {project.location}
+                                {/* Text Section */}
+                                <div className="p-8 flex flex-col flex-grow">
+                                    <h3 className="font-serif text-xl font-bold text-moss mb-3 group-hover:text-cypress transition-colors">
+                                        {project.title}
+                                    </h3>
+                                    
+                                    {/* DESCRIPTION PREVIEW (Line Clamp limits it to 3 lines) */}
+                                    <div className="text-sm text-gray-600 mb-6 leading-relaxed flex-grow line-clamp-3">
+                                        {project.description ? project.description : `This project is actively restoring the ecosystem in ${project.location}.`}
+                                    </div>
+                                    
+                                    <span className="text-cypress text-xs font-bold uppercase tracking-widest mt-auto group-hover:underline">
+                                        Learn More →
                                     </span>
-                                    {/* We use location/status as description if you haven't added a 'description' field yet */}
-                                    This project is actively restoring the ecosystem in {project.location}.
                                 </div>
-                                <span className="text-cypress text-xs font-bold uppercase tracking-widest mt-auto">Learn More</span>
                             </div>
-                        </div>
+                        </Link>
                       ))
                   ) : (
                       <p className="col-span-3 text-center text-gray-400">Loading projects...</p>
@@ -149,9 +152,9 @@ export default async function Home() {
               </div>
               
               <div className="mt-8 text-center md:hidden">
-                  <a href="/projects" className="inline-block text-cypress font-bold uppercase text-xs tracking-widest border-b border-cypress pb-1">
+                  <Link href="/projects" className="inline-block text-cypress font-bold uppercase text-xs tracking-widest border-b border-cypress pb-1">
                       View All Projects →
-                  </a>
+                  </Link>
               </div>
           </div>
       </section>

@@ -1,13 +1,15 @@
 import Image from "next/image";
+import Link from "next/link"; // <--- Import Link
 import { client } from "../../sanity/client";
 import { urlFor } from "../../sanity/image";
 
-export const dynamic = "force-dynamic"; // <--- Add this line
+export const dynamic = "force-dynamic"; 
 
-// 1. The GROQ Query (Asking Sanity for data)
-const query = `*[_type == "project"]{
+// 1. The GROQ Query (Added 'slug' to the list)
+const query = `*[_type == "project"] | order(_createdAt desc) {
   _id,
   title,
+  slug,  // <--- Added Slug
   location,
   description,
   fundingGoal,
@@ -21,10 +23,9 @@ export const metadata = {
   description: "Explore our active initiatives across reforestation, urban ecology, and education.",
 };
 
-// 2. Make the function Async to fetch data
 export default async function ProjectsPage() {
   
-  // 3. Fetch the data
+  // 2. Fetch the data
   const projects = await client.fetch(query);
 
   return (
@@ -60,7 +61,7 @@ export default async function ProjectsPage() {
       <section className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            {/* 4. Loop through the Sanity Data */}
+            {/* 3. Loop through the Sanity Data */}
             {projects.map((project) => (
                 <div key={project._id} className="bg-white group rounded-sm shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-olive/10">
                     
@@ -86,22 +87,28 @@ export default async function ProjectsPage() {
                     <div className="p-8 flex flex-col flex-grow">
                         <div className="text-cypress text-[10px] font-bold uppercase tracking-widest mb-2">{project.location}</div>
                         <h3 className="font-serif text-2xl font-bold text-moss mb-3">{project.title}</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-grow">
+                        {/* Line Clamp limits text to 3 lines so cards stay even */}
+                        <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
                             {project.description}
                         </p>
                         
                         {/* Dynamic Progress Bar */}
                         <div className="mt-auto">
                             <div className="flex justify-between text-[10px] font-bold uppercase text-cedar mb-2">
-                                <span>{project.treesPlanted} Trees Planted</span>
-                                <span className="text-cypress">{project.fundingGoal}% Funded</span>
+                                <span>{project.treesPlanted ? project.treesPlanted.toLocaleString() : 0} Trees Planted</span>
+                                <span className="text-cypress">{project.fundingGoal || 0}% Funded</span>
                             </div>
                             <div className="w-full bg-aloe h-1 rounded-full overflow-hidden">
-                                <div className="bg-cypress h-full" style={{ width: `${project.fundingGoal}%` }}></div>
+                                <div className="bg-cypress h-full" style={{ width: `${project.fundingGoal || 0}%` }}></div>
                             </div>
-                            <a href="#" className="block mt-6 text-center border border-olive/30 py-3 text-xs font-bold uppercase tracking-widest text-moss hover:bg-moss hover:text-white transition-colors rounded-sm">
+                            
+                            {/* THE LINK TO THE DETAILS PAGE */}
+                            <Link 
+                                href={`/projects/${project.slug?.current}`} 
+                                className="block mt-6 text-center border border-olive/30 py-3 text-xs font-bold uppercase tracking-widest text-moss hover:bg-moss hover:text-white transition-colors rounded-sm"
+                            >
                                 View Details
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
