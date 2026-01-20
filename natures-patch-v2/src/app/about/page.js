@@ -63,41 +63,76 @@ export default function AboutPage() {
           </div>
           {/* Visual Placeholder for Founder/History Photo */}
           <div className="h-96 bg-cedar/20 rounded-sm flex items-center justify-center text-moss/30 font-serif italic text-2xl">
-             [Historic Photo Placeholder]
+              [Historic Photo Placeholder]
           </div>
         </div>
       </section>
 
-      {/* === 2.2 VISION & MISSION === */}
+      {/* === 2.2 VISION, MISSION & VALUES === */}
       <section className="bg-light py-24">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+        <div className="max-w-7xl mx-auto px-6">
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Row 1: Vision & Mission */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
                 {/* Vision */}
-                <div className="bg-white p-10 shadow-sm border-t-4 border-moss">
-                    <h3 className="font-serif text-2xl font-bold text-moss mb-4">Our Vision</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                        A world where urban development and natural ecosystems coexist in a regenerative cycle.
+                <div className="bg-white p-10 shadow-sm border-t-4 border-moss flex flex-col justify-center text-center">
+                    <h3 className="font-serif text-3xl font-bold text-moss mb-6">Our Vision</h3>
+                    <p className="text-gray-600 leading-relaxed text-lg">
+                        A world where communities and nature thrive together, with healthy ecosystems forming the foundation of resilient livelihoods, climate stability, and future generations.
                     </p>
                 </div>
 
                 {/* Mission */}
-                <div className="bg-white p-10 shadow-sm border-t-4 border-cypress">
-                    <h3 className="font-serif text-2xl font-bold text-moss mb-4">Our Mission</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                        To empower communities with the tools, data, and resources needed to restore their local environments.
+                <div className="bg-white p-10 shadow-sm border-t-4 border-cypress flex flex-col justify-center text-center">
+                    <h3 className="font-serif text-3xl font-bold text-moss mb-6">Our Mission</h3>
+                    <p className="text-gray-600 leading-relaxed text-lg">
+                        To restore, protect, and grow natural ecosystems through community-driven environmental action, climate education, and sustainable solutions that reconnect people with nature while addressing today’s environmental challenges.
                     </p>
                 </div>
+            </div>
 
-                 {/* Values */}
-                 <div className="bg-white p-10 shadow-sm border-t-4 border-olive">
-                    <h3 className="font-serif text-2xl font-bold text-moss mb-4">Core Values</h3>
-                    <ul className="text-gray-600 text-left space-y-2 list-disc list-inside">
-                        <li>Community Stewardship</li>
-                        <li>Radical Transparency</li>
-                        <li>Scientific Rigor</li>
-                    </ul>
-                </div>
+            {/* Row 2: Core Values Grid */}
+            <div className="text-center mb-12">
+                <h3 className="font-serif text-3xl font-bold text-moss">Core Values</h3>
+                <div className="h-1 w-20 bg-olive mx-auto mt-4"></div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 {/* Value 1 */}
+                 <div className="bg-white p-8 shadow-sm border-l-4 border-olive hover:-translate-y-1 transition-transform">
+                     <h4 className="font-bold text-moss text-lg mb-3">Environmental Stewardship</h4>
+                     <p className="text-sm text-gray-600 leading-relaxed">We act as responsible caretakers of the earth, prioritizing long-term ecological health over short-term gains.</p>
+                 </div>
+
+                 {/* Value 2 */}
+                 <div className="bg-white p-8 shadow-sm border-l-4 border-olive hover:-translate-y-1 transition-transform">
+                     <h4 className="font-bold text-moss text-lg mb-3">Community First</h4>
+                     <p className="text-sm text-gray-600 leading-relaxed">Lasting environmental impact begins with empowered communities. We work with people, not for them.</p>
+                 </div>
+
+                 {/* Value 3 */}
+                 <div className="bg-white p-8 shadow-sm border-l-4 border-olive hover:-translate-y-1 transition-transform">
+                     <h4 className="font-bold text-moss text-lg mb-3">Sustainability with Integrity</h4>
+                     <p className="text-sm text-gray-600 leading-relaxed">We promote solutions that are environmentally sound, socially just, and economically viable, without compromise.</p>
+                 </div>
+
+                 {/* Value 4 */}
+                 <div className="bg-white p-8 shadow-sm border-l-4 border-olive hover:-translate-y-1 transition-transform">
+                     <h4 className="font-bold text-moss text-lg mb-3">Education & Awareness</h4>
+                     <p className="text-sm text-gray-600 leading-relaxed">Knowledge drives change. We believe in educating communities, especially youth, to build a culture of environmental responsibility.</p>
+                 </div>
+
+                 {/* Value 5 */}
+                 <div className="bg-white p-8 shadow-sm border-l-4 border-olive hover:-translate-y-1 transition-transform">
+                     <h4 className="font-bold text-moss text-lg mb-3">Collaboration & Partnership</h4>
+                     <p className="text-sm text-gray-600 leading-relaxed">Environmental challenges require collective action. We value partnerships across sectors to amplify impact.</p>
+                 </div>
+
+                 {/* Value 6 */}
+                 <div className="bg-white p-8 shadow-sm border-l-4 border-olive hover:-translate-y-1 transition-transform">
+                     <h4 className="font-bold text-moss text-lg mb-3">Accountability & Transparency</h4>
+                     <p className="text-sm text-gray-600 leading-relaxed">We hold ourselves to high ethical standards, ensuring openness, trust, and measurable impact in all we do.</p>
+                 </div>
             </div>
 
         </div>
