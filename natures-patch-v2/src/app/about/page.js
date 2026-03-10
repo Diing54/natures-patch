@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const metadata = {
   title: "About Us | Nature's Patch",
   description: "Our history, philosophy, and leadership team.",
@@ -138,43 +140,78 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* === 2.3 LEADERSHIP === */}
+      {/* === 2.3 LEADERSHIP & TEAM === */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl text-moss font-bold">Leadership & Advisory</h2>
+            <h2 className="font-serif text-4xl text-moss font-bold">Leadership Team</h2>
             <div className="h-1 w-20 bg-olive mx-auto mt-6"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Team Member 1 */}
-            <div className="group text-center">
-                <div className="h-64 bg-cedar/30 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
-                    {/* Placeholder for Headshot */}
+        {/* The Founder Block */}
+        <div className="mb-16 bg-white p-8 md:p-12 shadow-md border-t-4 border-moss flex flex-col md:flex-row gap-12 items-center rounded-sm">
+            <div className="w-full md:w-1/3 text-center group">
+                <div className="relative h-80 w-full rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 shadow-inner bg-cedar/10">
+                    <Image src="/team/Josek.png" alt="Founder" fill className="object-cover object-top" />
                 </div>
-                <h3 className="font-serif text-xl font-bold text-moss">Jane Doe</h3>
-                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1">Executive Director</p>
+                <h3 className="font-serif text-2xl font-bold text-moss mt-6">Josek</h3>
+                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1">Founder</p>
+            </div>
+            
+            <div className="w-full md:w-2/3 space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                    I founded Nature’s Patch because I refuse to accept that cities must grow at the expense of nature. 
+                    My goal is to prove that urban environments can expand while becoming greener, healthier, and more resilient. 
+                    Nature’s Patch exists to restore the presence of nature in the places where people live, work, and build their futures.
+                </p>
+                <p>
+                    Through this initiative, I focus on transforming overlooked urban spaces into thriving ecological patches 
+                    that support biodiversity, increase green cover, and reconnect communities with the natural systems that sustain them. 
+                    My approach is rooted in the belief that meaningful environmental change does not begin in distant institutions—it begins 
+                    within communities willing to reshape their own landscapes.
+                </p>
+                <p>
+                    My broader vision is to cultivate a generation that sees environmental stewardship not as an obligation, but as leadership. 
+                    By combining community action, environmental advocacy, and practical conservation, I aim to help build cities where 
+                    nature is not pushed to the margins but integrated into the very design of urban life.
+                </p>
+                <p className="font-serif text-moss font-bold italic">
+                    Nature’s Patch represents my commitment to a future where thriving ecosystems and thriving communities grow together.
+                </p>
+            </div>
+        </div>
+
+        {/* The Team Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            
+            {/* Team Member: Muchira */}
+            <div className="group bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div className="relative h-64 w-full bg-cedar/10 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <Image src="/team/Muchira.png" alt="Muchira Kibicho" fill className="object-cover object-top" />
+                </div>
+                <h3 className="font-serif text-xl font-bold text-moss">Muchira Kibicho</h3>
+                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Treasurer</p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                    Muchira Kibicho is an IR enthusiast in the fields of political economy and international law and security. 
+                    His passion is in policy reform, leadership and governance. He is passionate about social impact through 
+                    storytelling and community engagement.
+                </p>
             </div>
 
-            {/* Team Member 2 */}
-            <div className="group text-center">
-                <div className="h-64 bg-cedar/30 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500"></div>
-                <h3 className="font-serif text-xl font-bold text-moss">John Smith</h3>
-                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1">Head of Conservation</p>
+            {/* Team Member: Brian */}
+            <div className="group bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div className="relative h-64 w-full bg-cedar/10 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <Image src="/team/Brian.png" alt="Brian K. Too" fill className="object-cover object-top" />
+                </div>
+                <h3 className="font-serif text-xl font-bold text-moss">Brian K. Too</h3>
+                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Board Director</p>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                    A student of International Relations and Diplomacy at Riara University, whose endeavors reflect a purposeful 
+                    commitment to building bridges between policy objectives and institutional implementation of youth matters. 
+                    Grounded in the belief that lasting change is forged through dialogue, collaboration and shared vision, 
+                    Brian brings a blend of political acumen, strategic communications, and cross-cultural leadership to every table he sits at.
+                </p>
             </div>
 
-             {/* Team Member 3 */}
-             <div className="group text-center">
-                <div className="h-64 bg-cedar/30 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500"></div>
-                <h3 className="font-serif text-xl font-bold text-moss">Dr. A. Mwangi</h3>
-                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1">Lead Scientist</p>
-            </div>
-
-             {/* Team Member 4 */}
-             <div className="group text-center">
-                <div className="h-64 bg-cedar/30 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500"></div>
-                <h3 className="font-serif text-xl font-bold text-moss">Sarah K.</h3>
-                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1">Community Liaison</p>
-            </div>
         </div>
       </section>
 
