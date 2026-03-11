@@ -149,11 +149,12 @@ export default function AboutPage() {
 
         {/* The Founder Block */}
         <div className="mb-16 bg-white p-8 md:p-12 shadow-md border-t-4 border-moss flex flex-col md:flex-row gap-12 items-center rounded-sm">
-            <div className="w-full md:w-1/3 text-center group">
-                <div className="relative h-80 w-full rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 shadow-inner bg-cedar/10">
-                    <Image src="/team/Josek.png" alt="Founder" fill className="object-cover object-top" />
+            <div className="w-full md:w-1/3 text-center flex flex-col items-center">
+                {/* FIXED EXACT SQUARE CONTAINER (w-64 h-64) */}
+                <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shadow-inner bg-cedar/10 shrink-0">
+                    <Image src="/team/Josek.png" alt="Founder" fill className="object-cover object-top md:object-center" />
                 </div>
-                <h3 className="font-serif text-2xl font-bold text-moss mt-6">Josek</h3>
+                <h3 className="font-serif text-2xl font-bold text-moss">Josek</h3>
                 <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1">Founder</p>
             </div>
             
@@ -184,13 +185,14 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             
             {/* Team Member: Muchira */}
-            <div className="group bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
-                <div className="relative h-64 w-full bg-cedar/10 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
-                    <Image src="/team/Muchira.png" alt="Muchira Kibicho" fill className="object-cover object-top" />
+            <div className="bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
+                {/* FIXED EXACT SQUARE CONTAINER (w-64 h-64) */}
+                <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shrink-0">
+                    <Image src="/team/Muchira.png" alt="Muchira Kibicho" fill className="object-cover object-center" />
                 </div>
                 <h3 className="font-serif text-xl font-bold text-moss">Muchira Kibicho</h3>
                 <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Treasurer</p>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-gray-600 leading-relaxed flex-grow">
                     Muchira Kibicho is an IR enthusiast in the fields of political economy and international law and security. 
                     His passion is in policy reform, leadership and governance. He is passionate about social impact through 
                     storytelling and community engagement.
@@ -198,13 +200,14 @@ export default function AboutPage() {
             </div>
 
             {/* Team Member: Brian */}
-            <div className="group bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
-                <div className="relative h-64 w-full bg-cedar/10 mb-6 rounded-sm overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
-                    <Image src="/team/Brian.png" alt="Brian K. Too" fill className="object-cover object-top" />
+            <div className="bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
+                {/* FIXED EXACT SQUARE CONTAINER (w-64 h-64) */}
+                <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shrink-0">
+                    <Image src="/team/Brian.png" alt="Brian K. Too" fill className="object-cover object-center" />
                 </div>
                 <h3 className="font-serif text-xl font-bold text-moss">Brian K. Too</h3>
                 <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Board Director</p>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-gray-600 leading-relaxed flex-grow">
                     A student of International Relations and Diplomacy at Riara University, whose endeavors reflect a purposeful 
                     commitment to building bridges between policy objectives and institutional implementation of youth matters. 
                     Grounded in the belief that lasting change is forged through dialogue, collaboration and shared vision, 
