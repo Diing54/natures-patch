@@ -181,12 +181,11 @@ export default function AboutPage() {
             </div>
         </div>
 
-        {/* The Team Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* The Team Grid (Updated to handle 3 members) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             
             {/* Team Member: Muchira */}
             <div className="bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
-                {/* FIXED EXACT SQUARE CONTAINER (w-64 h-64) */}
                 <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shrink-0">
                     <Image src="/team/Muchira.png" alt="Muchira Kibicho" fill className="object-cover object-center" />
                 </div>
@@ -201,7 +200,6 @@ export default function AboutPage() {
 
             {/* Team Member: Brian */}
             <div className="bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
-                {/* FIXED EXACT SQUARE CONTAINER (w-64 h-64) */}
                 <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shrink-0">
                     <Image src="/team/Brian.png" alt="Brian K. Too" fill className="object-cover object-center" />
                 </div>
@@ -212,6 +210,18 @@ export default function AboutPage() {
                     commitment to building bridges between policy objectives and institutional implementation of youth matters. 
                     Grounded in the belief that lasting change is forged through dialogue, collaboration and shared vision, 
                     Brian brings a blend of political acumen, strategic communications, and cross-cultural leadership to every table he sits at.
+                </p>
+            </div>
+
+            {/* Team Member: Libna */}
+            <div className="bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shrink-0">
+                    <Image src="/team/Libna.png" alt="Libna Lassie" fill className="object-cover object-center" />
+                </div>
+                <h3 className="font-serif text-xl font-bold text-moss">Libna Lassie</h3>
+                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Board Director</p>
+                <p className="text-sm text-gray-600 leading-relaxed flex-grow">
+                    Libna Lassie is an International Relations practitioner dedicated to shaping inclusive policy dialogue across Africa. With a strong commitment to peace, security, and collaborative governance, Libna engages in initiatives that promote participation in policy and decision-making processes. Her work centers on diplomacy, international cooperation, and fostering dialogue that contributes to sustainable and inclusive development.
                 </p>
             </div>
 

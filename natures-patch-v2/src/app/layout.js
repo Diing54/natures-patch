@@ -121,8 +121,18 @@ export default function RootLayout({ children }) {
                 <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-xs text-olive">
                     <p>© 2026 Nature's Patch. All rights reserved.</p>
                     <div className="flex space-x-6 mt-2 md:mt-0">
-                        <span>Designed in Nairobi.</span>
-                    </div>
+    <span>
+        Designed by{" "}
+        <a 
+            href="https://github.com/Diing54/Diing54" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-white hover:text-cypress transition-colors font-bold underline decoration-olive/50 underline-offset-4"
+        >
+            Diing
+        </a>.
+    </span>
+</div>
                 </div>
             </div>
         </footer>
