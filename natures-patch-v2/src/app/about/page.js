@@ -181,7 +181,7 @@ export default function AboutPage() {
             </div>
         </div>
 
-        {/* The Team Grid (Updated to handle 3 members) */}
+        {/* The Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             
             {/* Team Member: Muchira */}
@@ -222,6 +222,18 @@ export default function AboutPage() {
                 <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Board Director</p>
                 <p className="text-sm text-gray-600 leading-relaxed flex-grow">
                     Libna Lassie is an International Relations practitioner dedicated to shaping inclusive policy dialogue across Africa. With a strong commitment to peace, security, and collaborative governance, Libna engages in initiatives that promote participation in policy and decision-making processes. Her work centers on diplomacy, international cooperation, and fostering dialogue that contributes to sustainable and inclusive development.
+                </p>
+            </div>
+
+            {/* Team Member: Erupe */}
+            <div className="bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shrink-0">
+                    <Image src="/team/Erupe.png" alt="Erupe Ekaale" fill className="object-cover object-center" />
+                </div>
+                <h3 className="font-serif text-xl font-bold text-moss">Erupe Ekaale</h3>
+                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Board Director</p>
+                <p className="text-sm text-gray-600 leading-relaxed flex-grow">
+                    Erupe Ekaale is a dedicated Director at Nature's Patch, where he brings leadership and a proven track record in advancing sustainable systems. With expertise in the circular economy, Erupe has played an innovative role in designing and implementing strategies that promote resource efficiency, waste reduction, and closed-loop models across industries and communities. A strategic thinker and effective collaborator, he excels in high-stakes negotiations, forging impactful partnerships with various stakeholders to drive policy change and scalable solutions. His ability to bridge diverse interests has led to successful multi-party agreements that accelerate the transition to circular practices while balancing economic, environmental, and social priorities. Passionate about systemic change, Erupe combines strong governance experience, innovative problem-solving, and a commitment to ethical leadership to help guide Nature's Patch mission toward a more regenerative and equitable future.
                 </p>
             </div>
 
