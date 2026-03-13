@@ -237,6 +237,18 @@ export default function AboutPage() {
                 </p>
             </div>
 
+            {/* Team Member: Muisyo */}
+            <div className="bg-white p-8 rounded-sm shadow-sm border border-olive/10 hover:shadow-md transition-all text-center flex flex-col items-center">
+                <div className="relative w-56 h-56 lg:w-64 lg:h-64 mb-6 rounded-sm overflow-hidden shrink-0">
+                    <Image src="/team/Muisyo.png" alt="Muisyo Stacy" fill className="object-cover object-center" />
+                </div>
+                <h3 className="font-serif text-xl font-bold text-moss">Muisyo Stacy</h3>
+                <p className="text-xs uppercase tracking-widest text-cypress font-bold mt-1 mb-4">Environmental Affairs Officer</p>
+                <p className="text-sm text-gray-600 leading-relaxed flex-grow">
+                    Muisyo Stacy serves as the Environmental Affairs Officer, bringing enthusiasm, creativity and a strong commitment to environmental sustainability. Passionate about protecting natural spaces and promoting responsible environmental practices, she works to encourage initiatives that foster awareness and long-term ecological balance. With a naturally creative and hands-on approach, Muisyo enjoys exploring practical ways to reduce waste and promote sustainable living. Her interest in crafting and re-using materials reflects a belief that small, thoughtful actions can contribute to meaningful environmental change. Committed to action and impact, Muisyo strives to turn environmental awareness into lasting change.
+                </p>
+            </div>
+
         </div>
       </section>
 
